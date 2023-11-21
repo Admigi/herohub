@@ -1,4 +1,6 @@
 class HerosController < ApplicationController
+  skip_before_action :authenticate_user!, only: %i[index show]
+
   def index
     @heros = Hero.all
   end
@@ -15,3 +17,4 @@ class HerosController < ApplicationController
     @hero
   end
 end
+  
