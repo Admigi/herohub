@@ -1,12 +1,52 @@
-<h1><%= @hero.name %></h1>
-
-<div>
-  <%= @hero.description %>
-  <%= @hero.power %>
-  <%= @hero.city %>
-  <%= @hero.price %>
-</div>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hero</title>
+</head>
+<body>
+  <div class="navbar navbar-light navbar-herohub navbar-light">
+    <div class="container-fluid">
+      <%= link_to "/", class: "navbar-brand" do %>
+        <%= image_tag "logo.png", style: "height: 50px; width: auto;" %>
+      <% end %>
+  
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ms-auto flex-row justify-content-center">
+            <%# if user_signed_in? %>
+              <li class="nav-item active">
+                <%= link_to "Heroes", "/heros", class: "nav-link", style: "margin-right: 10px;" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "Profile", "#", class: "nav-link", style: "margin-right: 10px;" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "Add your hero", "#", class: "nav-link", style: "margin-right: 10px;" %>
+              </li>
+            <%# else %>
+              <!--li class="nav-item"-->
+                <%#= link_to "Login", new_user_session_path, class: "nav-link" %>
+              <!--/li-->
+            <%# end %>
+          </ul>
+        </div>
+      </div>
+  </div>
+  
 <%= link_to "Edit", edit_hero_path %>
 <%= link_to "Delete", hero_path(@hero), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
-<%= link_to "Back to the heroes list", heros_path %>
+<%= link_to "Back", heros_path, class: "btn btn-primary" %>
+<div class="card">
+  <div class="card-body">
+    <h1 class="card-title"><%= @hero.name %></h1>
+    <p class="card-text"><%= @hero.description %></p>
+    <p class="card-text"><%= @hero.power %></p>
+    <p class="card-text"><%= @hero.city %></p>
+    <p class="card-text"><%= @hero.price %></p>
+  </div>
+</div>
