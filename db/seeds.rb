@@ -22,11 +22,8 @@ user2 = User.create(username: "tata", email: "tataduguetto@toto.com", password: 
     description: Faker::Superhero.descriptor,
     power: Faker::Superhero.power,
     city: Faker::Address.city,
-    price: Faker::Number.between(from: 1, to: 100000000),
+    price: Faker::Number.between(from: 1, to: 1000000000),
     user_id: user.id
   )
 
 end
-
-
-# Hero.create!(name: "jacky", description: "n'a pas besoin de siège", power: "a des couilles de la taille d'un pouf et peut s'asseoir dessus", city: "Nantes", price: "2500€", user_id: user.id )
