@@ -9,7 +9,9 @@
         <li><%= hero.description %></li>
         <li><%= hero.power %></li>
         <li><%= hero.city %></li>
-        <li><%= hero.price %></li>
+        <li><%= hero.price %>$</li>
       </ul>
     <% end %>
 </div>
+
+<%= link_to "new", new_hero_path %>
