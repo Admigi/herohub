@@ -1,7 +1,13 @@
 <h1>List of Heroes</h1>
 
+<br>
+
 <ul>
   <% @heros.each do |hero| %>
-    <li><pe>hero.name</pe></li>
+    <li><%= hero.name %></li>
+    <li><%= hero.description %></li>
+    <li><%= hero.power %></li>
+    <li><%= hero.city %></li>
+    <li><%= hero.price %></li>
   <% end %>
 </ul>
