@@ -1,5 +1,8 @@
 source "https://rubygems.org"
 
+# Faker
+gem "faker"
+
 # Devise
 gem "devise"
 
