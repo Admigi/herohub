@@ -7,6 +7,23 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+require "faker"
+
+Hero.destroy_all
 User.destroy_all
-User.create(username: "toto", email: "totoduguetto@toto.com", password: "password")
-User.create(username: "tata", email: "tataduguetto@toto.com", password: "password")
+user = User.create(username: "toto", email: "totoduguetto@toto.com", password: "password")
+user2 = User.create(username: "tata", email: "tataduguetto@toto.com", password: "password")
+
+
+10.times do
+
+  Hero.create(
+    name: Faker::Superhero.name,
+    description: Faker::Superhero.descriptor,
+    power: Faker::Superhero.power,
+    city: Faker::Address.city,
+    price: Faker::Number.between(from: 1, to: 1000000000),
+    user_id: user.id
+  )
+
+end
