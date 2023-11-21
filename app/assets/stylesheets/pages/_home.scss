@@ -1,1 +1,57 @@
-// Specific CSS for your home-page
+.navbar-herohub {
+    justify-content: space-between;
+    background: white;
+    background-color: black;
+
+    .navbar-herohub .navbar-collapse {
+        flex-grow: 0;
+      }
+
+      
+    .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+        &:hover,
+        &:focus {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 144, 0, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+        }
+    }
+
+    .navbar-herohub .navbar-brand img {
+        width: 40px;
+    }
+    
+    .navbar-nav {
+      .nav-item {
+        .nav-link {
+          color: white;
+          
+          &:hover,
+          &:focus {
+            color: #FF9000;
+          }
+        }
+      }
+    }
+  }
+
+  .jumbotron {
+    background-color: black;
+    color: #FF9000;
+    
+    .display-4 {
+      color: white;
+    }
+    
+    .lead {
+      color: white;
+    }
+    
+    .btn-primary {
+      background-color: #FF9000;
+      color: white;
+      
+      &:hover {
+        background-color: darken(#FF9000, 10%);
+      }
+    }
+  }

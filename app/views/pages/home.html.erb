@@ -1,2 +1,112 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="navbar navbar-light navbar-herohub navbar-light">
+  <div class="container-fluid">
+    <%= link_to "#", class: "navbar-brand" do %>
+      <%= image_tag "logo.png", style: "height: 50px; width: auto;" %>
+    <% end %>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto flex-row justify-content-center">
+          <%# if user_signed_in? %>
+            <li class="nav-item active">
+              <%= link_to "Heroes", "/heroes", class: "nav-link", style: "margin-right: 10px;" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Profile", "#", class: "nav-link", style: "margin-right: 10px;" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Add your hero", "#", class: "nav-link", style: "margin-right: 10px;" %>
+            </li>
+          <%# else %>
+            <!--li class="nav-item"-->
+              <%#= link_to "Login", new_user_session_path, class: "nav-link" %>
+            <!--/li-->
+          <%# end %>
+        </ul>
+      </div>
+    </div>
+</div>
+
+
+<section class="jumbotron jumbotron-fluid bg-black text-center mb-3 py-5">
+  <div class="container">
+    <h1 class="display-4">Rent your hero.</h1>
+    <p class="lead">Discover and book unique heroes for your adventures.</p>
+    <p class="p-3">
+      <%= link_to "Rent Now!", "#", class: "btn btn-primary btn-lg mr-2", style: "text-decoration: none;" %>
+    </p>
+  </div>
+</section>
+
+<!-- How it Works Section -->
+<section class="how-it-works">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="step">
+          <i class="fas fa-search fa-3x"></i>
+          <h3>Search</h3>
+          <p>Find the perfect hero by searching through our extensive listings.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="step">
+          <i class="fas fa-calendar-alt fa-3x"></i>
+          <h3>Book</h3>
+          <p>Book your desired hero by selecting your preferred dates and completing the reservation process.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="step">
+          <i class="fas fa-key fa-3x"></i>
+          <h3>Enjoy</h3>
+          <p>Enjoy your adventure with a hero by your side.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="featured-properties">
+  <div class="container">
+    <h2 class="text-center mb-4">Featured Heroes</h2>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="property">
+          <img src="https://via.placeholder.com/400x300" alt="Hero 1">
+          <h4>Hero 1</h4>
+          <p>Summon this hero to bring strength to your battles.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="property">
+          <img src="https://via.placeholder.com/400x300" alt="Hero 2">
+          <h4>Hero 2</h4>
+          <p>Unleash the power of this hero and witness greatness like never before.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="property">
+          <img src="https://via.placeholder.com/400x300" alt="Hero 3">
+          <h4>Hero 3</h4>
+          <p>Embark on an epic journey with this hero and conquer all challenges.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="footer">
+  <div class="footer-links">
+    <a href="#"><i class="fab fa-facebook-f"></i></a>
+    <a href="#"><i class="fab fa-twitter"></i></a>
+    <a href="#"><i class="fab fa-instagram"></i></a>
+    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+  </div>
+  <div class="footer-copyright">
+    &copy; <%= Time.now.year %> Herohub. All rights reserved.
+  </div>
+</div>
