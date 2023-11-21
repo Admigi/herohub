@@ -37,8 +37,9 @@
         </div>
       </div>
   </div>
-
-
+  
+<%= link_to "Edit", edit_hero_path %>
+<%= link_to "Delete", hero_path(@hero), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
 <%= link_to "Back", heros_path, class: "btn btn-primary" %>
 <div class="card">
   <div class="card-body">
