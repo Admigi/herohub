@@ -1,3 +1,7 @@
+:root {
+  font-family: "Helvetica", sans-serif;
+}
+
 .navbar-herohub {
     justify-content: space-between;
     background: white;
@@ -35,23 +39,23 @@
   }
 
   .jumbotron {
-    background-color: black;
+    background-color: #333;
     color: #FF9000;
-    
+
     .display-4 {
-      color: white;
+        color: white;
     }
-    
+
     .lead {
-      color: white;
+        color: white;
     }
-    
+
     .btn-primary {
-      background-color: #FF9000;
-      color: white;
-      
-      &:hover {
-        background-color: darken(#FF9000, 10%);
-      }
+        background-color: #FF9000;
+        color: white;
+
+        &:hover {
+            background-color: darken(#FF9000, 10%);
+        }
     }
-  }
+}

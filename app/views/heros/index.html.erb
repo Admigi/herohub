@@ -1,15 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heroes</title>
+</head>
+<body>
+  <div class="navbar navbar-light navbar-herohub navbar-light">
+    <div class="container-fluid">
+      <%= link_to "/", class: "navbar-brand" do %>
+        <%= image_tag "logo.png", style: "height: 50px; width: auto;" %>
+      <% end %>
+  
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ms-auto flex-row justify-content-center">
+            <%# if user_signed_in? %>
+              <li class="nav-item active">
+                <%= link_to "Heroes", "/heros", class: "nav-link", style: "margin-right: 10px;" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "Profile", "#", class: "nav-link", style: "margin-right: 10px;" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "Add your hero", "#", class: "nav-link", style: "margin-right: 10px;" %>
+              </li>
+            <%# else %>
+              <!--li class="nav-item"-->
+                <%#= link_to "Login", new_user_session_path, class: "nav-link" %>
+              <!--/li-->
+            <%# end %>
+          </ul>
+        </div>
+      </div>
+  </div>
+
 <h1>List of Heroes</h1>
-
 <br>
-
-<div>
-    <% @heros.each do |hero| %>
-      <h2><%= link_to hero.name, hero_path(hero) %></h2>
-      <ul>
-        <li><%= hero.description %></li>
-        <li><%= hero.power %></li>
-        <li><%= hero.city %></li>
-        <li><%= hero.price %></li>
-      </ul>
-    <% end %>
+<%= link_to "Home", root_path, class: "btn btn-primary" %>
+<div class="row">
+  <% @heros.each do |hero| %>
+    <div class="col-md-4">
+      <div class="card mb-4">
+        <div class="card-body">
+          <h2 class="card-title"><%= link_to hero.name, hero_path(hero) %></h2>
+          <ul class="list-unstyled">
+            <li><strong>Description:</strong> <%= hero.description %></li>
+            <li><strong>Power:</strong> <%= hero.power %></li>
+            <li><strong>City:</strong> <%= hero.city %></li>
+            <li><strong>Price:</strong> <%= hero.price %></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  <% end %>
 </div>
