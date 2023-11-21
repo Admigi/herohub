@@ -7,7 +7,7 @@ class HerosController < ApplicationController
   end
 
   def show
-    @hero = Hero.find(params[:user_id])
+    @hero = Hero.find(params[:id])
   end
 
   def new
@@ -18,4 +18,3 @@ class HerosController < ApplicationController
     @hero
   end
 end
-  
