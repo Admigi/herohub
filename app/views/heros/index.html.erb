@@ -2,12 +2,14 @@
 
 <br>
 
-<ul>
-  <% @heros.each do |hero| %>
-    <li><%= hero.name %></li>
-    <li><%= hero.description %></li>
-    <li><%= hero.power %></li>
-    <li><%= hero.city %></li>
-    <li><%= hero.price %></li>
-  <% end %>
-</ul>
+<div>
+    <% @heros.each do |hero| %>
+      <h2><%= link_to hero.name, hero_path(hero) %></h2>
+      <ul>
+        <li><%= hero.description %></li>
+        <li><%= hero.power %></li>
+        <li><%= hero.city %></li>
+        <li><%= hero.price %></li>
+      </ul>
+    <% end %>
+</div>
