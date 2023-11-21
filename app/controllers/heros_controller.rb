@@ -1,7 +1,5 @@
 class HerosController < ApplicationController
-<<<<<<<<< Temporary merge branch 1
 
-=========
   skip_before_action :authenticate_user!, only: %i[index show]
 
   def index
