@@ -1,6 +1,6 @@
-class HeroesController < ApplicationController
+class HerosController < ApplicationController
   def index
-    @heroes = Hero.all
+    @heros = Hero.all
   end
 
   def show
