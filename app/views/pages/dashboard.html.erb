@@ -1,0 +1,13 @@
+<h1>Welcome, <%= @user.username %>!</h1>
+
+<h2>Your Bookings as Renter</h2>
+<% @bookings.each do |booking| %>
+  <!-- Display information about each booking -->
+  <%= booking.hero.name %> on <%= booking.date %> <!-- Adjust based on your actual attribute names -->
+<% end %>
+
+<h2>Your Bookings as Owner</h2>
+<% @bookings_as_owner.each do |booking| %>
+  <!-- Display information about each booking -->
+  <%= booking.hero.name %> on <%= booking.date %> <!-- Adjust based on your actual attribute names -->
+<% end %>
