@@ -11,91 +11,73 @@
     <!-- Bootstrap icons-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
 </head>
-<body class="d-flex flex-column h-100">
+<body class="d-flex flex-column h-100 bg-black">
     <main class="flex-shrink-0">
-        <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-black">
-            <div class="container px-5">
-                <%= link_to "/", class: "navbar-brand" do %>
-                    <%= image_tag "logo.png", style: "height: 50px; width: auto;" %>
-                <% end %>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="/heros">Heroes</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/">Profile</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/">FAQ</a></li>
-                    </ul> 
+      <!-- Navigation-->
+      <nav class="navbar navbar-expand-lg navbar-dark bg-black">
+        <div class="container px-5">
+          <%= link_to "/", class: "navbar-brand" do %>
+            <%= image_tag "logo.png", style: "height: 50px; width: auto;" %>
+          <% end %>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+              <li class="nav-item"><a class="nav-link" href="/heros">Heroes</a></li>
+              <li class="nav-item"><a class="nav-link" href="/">Profile</a></li>
+              <li class="nav-item"><a class="nav-link" href="/">FAQ</a></li>
+              <% if user_signed_in? %>
+                <li class="nav-item"><%= link_to "Logout", destroy_user_session_path, method: :delete, class: "nav-link" %></li>
+              <% else %>
+                <li class="nav-item"><%= link_to "Login", new_user_session_path, class: "nav-link" %></li>
+              <% end %>
+            </ul> 
                 </div>
             </div>
         </nav>
 
         <!-- Hero Details Section -->
-        <div class="container mt-4">
-            <%= link_to "Edit", edit_hero_path %>
-            <%= link_to "Delete", hero_path(@hero), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
-            <%= link_to "Back", heros_path, class: "btn btn-primary" %>
-
-            <div class="card mt-4">
-                <div class="card-body">
-                    <h1 class="card-title"><%= @hero.name %></h1>
-                    <p class="card-text"><%= @hero.description %></p>
-                    <p class="card-text"><%= @hero.power %></p>
-                    <p class="card-text"><%= @hero.city %></p>
-                    <p class="card-text"><%= @hero.price %></p>
+        <section class="py-5 bg-black">
+        <div class="container px-5 my-5">
+          <div class="row gx-5">
+              <div class="col-lg-4 mb-5 mb-lg-0">
+                <div class="col-lg-8 d-flex justify-content-start"> <!-- Modified line -->
+                  <%= link_to "Edit", edit_hero_path, class:"rounded-4 btn btn-outline-light btn-lg px-4 me-sm-3" %>
+                  <%= link_to "Delete", hero_path(@hero), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class:"me-sm-3 rounded-4 btn btn-outline-light btn-lg px-4", method: :delete %>
+                  <%= link_to "Back", hero_path, class:"me-sm-3 rounded-4 btn btn-outline-light btn-lg px-4" %>
                 </div>
+              </div>
+
+            <div class="card mt-4 rounded-5">
+              <div class="card-body">
+                <h1 class="card-title display-4 fw-bold"><%= @hero.name %></h1>
+                <div class="col-lg-8 mb-5 mb-lg-0 d-flex justify-content-start">
+                  <%= image_tag "hero#{rand(1..16)}.png", class: "card-img-top rounded-top-5", style: "width: 200px; height: auto;" %>
+                </div>
+                <p class="card-text"><strong>Description:</strong> <%= @hero.description %></p>
+                <p class="card-text"><strong>Power:</strong> <%= @hero.power %></p>
+                <p class="card-text"><strong>City:</strong> <%= @hero.city %></p>
+                <p class="card-text"><strong>Price:</strong> <%= number_to_currency(@hero.price, unit: '') %></p>
+              </div>
             </div>
+          </div>
+
+        <div class="container mt-4">
+          <%= simple_form_for [@hero, @booking], class: "mt-4" do |f| %>
+            <div class="row">
+              <div class="col-md-3">
+                <%= f.text_field :start_date, placeholder: "Start Date", class: "form-control" %>
+              </div>
+              <div class="col-md-3">
+                <%= f.text_field :end_date, placeholder: "End Date", class: "form-control" %>
+              </div>
+              <div class="col-md-2">
+                <%= f.submit "Book", class: "btn btn-primary" %>
+              </div>
+            </div>
+          <% end %>
         </div>
+      </section>
+
     </main>
 </body>
 </html>
-=======
-<body>
-  <div class="navbar navbar-light navbar-herohub navbar-light">
-    <div class="container-fluid">
-      <%= link_to "/", class: "navbar-brand" do %>
-        <%= image_tag "logo.png", style: "height: 50px; width: auto;" %>
-      <% end %>
-
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav ms-auto flex-row justify-content-center">
-              <li class="nav-item active">
-                <%= link_to "Heroes", "/heros", class: "nav-link", style: "margin-right: 10px;" %>
-              </li>
-              <li class="nav-item">
-                <%= link_to "Profile", "#", class: "nav-link", style: "margin-right: 10px;" %>
-              </li>
-              <li class="nav-item">
-                <%= link_to "Add your hero", "#", class: "nav-link", style: "margin-right: 10px;" %>
-              </li>
-          </ul>
-        </div>
-      </div>
-  </div>
-
-<%= link_to "Edit", edit_hero_path %>
-<%= link_to "Delete", hero_path(@hero), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
-<%= link_to "Back", heros_path, class: "btn btn-primary" %>
-<div class="card">
-  <div class="card-body">
-    <h1 class="card-title"><%= @hero.name %></h1>
-    <p class="card-text"><%= @hero.description %></p>
-    <p class="card-text"><%= @hero.power %></p>
-    <p class="card-text"><%= @hero.city %></p>
-    <p class="card-text"><%= @hero.price %></p>
-  </div>
-</div>
-
-<div>
-  <%= simple_form_for [@hero, @booking] do |f| %>
-
-    <%= f.text_field :start_date, placeholder: "dd/mm/yyyy" %>
-    <%= f.text_field :end_date, placeholder: "dd/mm/yyyy" %>
-    <%= f.submit "Booking"%>
-  <% end%>
-
-</div>

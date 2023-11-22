@@ -31,33 +31,33 @@
             </nav>
 
             <section class="bg-black">
-              <h1 class="text-center text-white">Heroes</h1>
-              <div class="container">
-                <%= link_to "Home", root_path, class: "rounded-4 btn btn-primary btn-lg px-4 me-sm-3 custom-btn mb-3" %>
-                <%= link_to "Create", new_hero_path, class: "rounded-4 btn btn-outline-light btn-lg px-4 mb-3" %>
-                <div class="row">
-                  <% @heros.each do |hero| %>
-                    <div class="col-md-4 mb-4">
-                      <div class="card rounded-5" style="background-color: #000000; background-image: linear-gradient(180deg, #000000 0%, #ffffff 100%);">                                   
-                        <%= image_tag "hero#{rand(1..16)}.png", class: "card-img-top rounded-top rounded-top-5", alt: "#{hero.name} Image" %>
-                        <div class="card-body">
-                          <h2 class="card-title h5 mb-3"><span style="font-weight: bold;"><%= hero.name %></h2>
-                          <p class="card-text text-muted mb-4"><%= hero.description %></p>
-                          <ul class="list-unstyled mb-0">
-                            <li><strong>Power:</strong> <span style="font-weight: bold;"><%= hero.power %></span></li>
-                            <li><strong>City:</strong> <span style="font-weight: bold;"><%= hero.city %></span></li>
-                            <li><strong>Price:</strong> <span style="font-weight: bold;"> <%= number_to_currency(hero.price, unit: '') %></li>
-                          </ul>
-                        </div>
-                        <div class="card-footer">
-                          <%= link_to "Rent", root_path, class: "rounded-4 btn btn-primary btn-lg px-4 me-sm-3 custom-btn mb-3" %>
-                          <%= link_to "More Infos", hero_path(hero), class: "rounded-4 btn btn-outline-light btn-lg px-4 mb-3 bg-black text-white" %>
+                <h1 class="text-center text-white">Heroes</h1>
+                <div class="container">
+                  <%= link_to "Home", root_path, class: "rounded-4 btn btn-primary btn-lg px-4 me-sm-3 custom-btn mb-3" %>
+                  <%= link_to "Create", new_hero_path, class: "rounded-4 btn btn-outline-light btn-lg px-4 mb-3" %>
+                  <div class="row">
+                    <% @heros.each do |hero| %>
+                      <div class="col-md-4 mb-4">
+                        <div class="card rounded-5" style="background-color: #000000; background-image: linear-gradient(180deg, #000000 0%, #ffffff 100%);">                                   
+                          <%= image_tag "hero#{rand(1..16)}.png", class: "card-img-top rounded-top rounded-top-5", alt: "#{hero.name} Image" %>
+                          <div class="card-body">
+                            <h2 class="card-title h5 mb-3"><span style="font-weight: bold;"><%= hero.name %></h2>
+                            <p class="card-text text-muted mb-4"><%= hero.description %></p>
+                            <ul class="list-unstyled mb-0">
+                              <li><strong>Power:</strong> <span style="font-weight: bold;"><%= hero.power %></span></li>
+                              <li><strong>City:</strong> <span style="font-weight: bold;"><%= hero.city %></span></li>
+                              <li><strong>Price:</strong> <span style="font-weight: bold;"> <%= number_to_currency(hero.price, unit: '') %></li>
+                            </ul>
+                          </div>
+                          <div class="card-footer">
+                            <%= link_to "Rent", root_path, class: "rounded-4 btn btn-primary btn-lg px-4 me-sm-3 custom-btn mb-3" %>
+                            <%= link_to "More Infos", hero_path(hero), class: "rounded-4 btn btn-outline-light btn-lg px-4 mb-3 bg-black text-white" %>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  <% end %>
+                    <% end %>
+                  </div>
                 </div>
-              </div>
             </section>
 
           <nav aria-label="Numerous Page Navigation">
