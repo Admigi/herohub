@@ -18,7 +18,6 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ms-auto flex-row justify-content-center">
-            <%# if user_signed_in? %>
               <li class="nav-item active">
                 <%= link_to "Heroes", "/heros", class: "nav-link", style: "margin-right: 10px;" %>
               </li>
@@ -28,11 +27,6 @@
               <li class="nav-item">
                 <%= link_to "Add your hero", "#", class: "nav-link", style: "margin-right: 10px;" %>
               </li>
-            <%# else %>
-              <!--li class="nav-item"-->
-                <%#= link_to "Login", new_user_session_path, class: "nav-link" %>
-              <!--/li-->
-            <%# end %>
           </ul>
         </div>
       </div>
