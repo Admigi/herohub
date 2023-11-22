@@ -15,7 +15,7 @@ user = User.create(username: "toto", email: "totoduguetto@toto.com", password: "
 user2 = User.create(username: "tata", email: "tataduguetto@toto.com", password: "password")
 
 
-10.times do
+100.times do
 
   Hero.create(
     name: Faker::Superhero.name,

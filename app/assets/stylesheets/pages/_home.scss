@@ -59,3 +59,19 @@
         }
     }
 }
+
+.custom-btn {
+  color: #212121;
+  background-color: #FF9000;
+  border-color: #FF9000;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.custom-btn:hover {
+  color: #212121;
+  background-color: white;
+  border-color: black;
+} 
+.glow-effect {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}

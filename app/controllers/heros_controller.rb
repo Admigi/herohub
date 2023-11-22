@@ -3,7 +3,12 @@ class HerosController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[index show]
 
   def index
-    @heros = Hero.all
+    per_page = 9
+    @page_number = (params[:page] || 1).to_i
+    offset = (@page_number - 1) * per_page
+
+    @heros = Hero.limit(per_page).offset(offset)
+    @total_pages = (Hero.count.to_f / per_page).ceil
   end
 
   def show
