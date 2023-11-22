@@ -1,10 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hero</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Herohub</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
 </head>
+<body class="d-flex flex-column h-100">
+    <main class="flex-shrink-0">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-black">
+            <div class="container px-5">
+                <%= link_to "/", class: "navbar-brand" do %>
+                    <%= image_tag "logo.png", style: "height: 50px; width: auto;" %>
+                <% end %>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="/heros">Heroes</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/">Profile</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/">FAQ</a></li>
+                    </ul> 
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hero Details Section -->
+        <div class="container mt-4">
+            <%= link_to "Edit", edit_hero_path %>
+            <%= link_to "Delete", hero_path(@hero), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+            <%= link_to "Back", heros_path, class: "btn btn-primary" %>
+
+            <div class="card mt-4">
+                <div class="card-body">
+                    <h1 class="card-title"><%= @hero.name %></h1>
+                    <p class="card-text"><%= @hero.description %></p>
+                    <p class="card-text"><%= @hero.power %></p>
+                    <p class="card-text"><%= @hero.city %></p>
+                    <p class="card-text"><%= @hero.price %></p>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
+=======
 <body>
   <div class="navbar navbar-light navbar-herohub navbar-light">
     <div class="container-fluid">
