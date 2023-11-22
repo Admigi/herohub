@@ -11,14 +11,13 @@
       <%= link_to "/", class: "navbar-brand" do %>
         <%= image_tag "logo.png", style: "height: 50px; width: auto;" %>
       <% end %>
-  
+
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-  
+
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ms-auto flex-row justify-content-center">
-            <%# if user_signed_in? %>
               <li class="nav-item active">
                 <%= link_to "Heroes", "/heros", class: "nav-link", style: "margin-right: 10px;" %>
               </li>
@@ -28,16 +27,11 @@
               <li class="nav-item">
                 <%= link_to "Add your hero", "#", class: "nav-link", style: "margin-right: 10px;" %>
               </li>
-            <%# else %>
-              <!--li class="nav-item"-->
-                <%#= link_to "Login", new_user_session_path, class: "nav-link" %>
-              <!--/li-->
-            <%# end %>
           </ul>
         </div>
       </div>
   </div>
-  
+
 <%= link_to "Edit", edit_hero_path %>
 <%= link_to "Delete", hero_path(@hero), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
 <%= link_to "Back", heros_path, class: "btn btn-primary" %>
@@ -49,4 +43,14 @@
     <p class="card-text"><%= @hero.city %></p>
     <p class="card-text"><%= @hero.price %></p>
   </div>
+</div>
+
+<div>
+  <%= simple_form_for [@hero, @booking] do |f| %>
+
+    <%= f.text_field :start_date, placeholder: "dd/mm/yyyy" %>
+    <%= f.text_field :end_date, placeholder: "dd/mm/yyyy" %>
+    <%= f.submit "Booking"%>
+  <% end%>
+
 </div>

@@ -17,6 +17,7 @@ class BookingsController < ApplicationController
   def create
     @hero = Hero.find(params[:hero_id])
     @booking = Booking.new(booking_params)
+    @booking.user = current_user
     @booking.hero = @hero
     if @booking.save
       redirect_to user_path(@hero.user)
@@ -29,7 +30,7 @@ class BookingsController < ApplicationController
   private
 
   def booking_params
-    params.require(:booking).permit(:booking_id)
+    params.require(:booking).permit(:start_date, :end_date)
   end
 
 end
