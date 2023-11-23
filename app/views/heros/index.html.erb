@@ -25,13 +25,31 @@
                             <li class="nav-item"><a class="nav-link" href="/heros">Heroes</a></li>
                             <li class="nav-item"><a class="nav-link" href="/">Profile</a></li>
                             <li class="nav-item"><a class="nav-link" href="/">FAQ</a></li>
+                            <% if user_signed_in? %>
+                            <li class="nav-item"><%= button_to "Logout", destroy_user_session_path, method: :delete, class: "nav-link" %></li>
+                              <% else %>
+                            <li class="nav-item"><%= button_to "Login", new_user_session_path, class: "nav-link" %></li>
+                            <% end %>
                         </ul> 
                     </div>
                 </div>
             </nav>
 
             <section class="bg-black">
-                <h1 class="text-center text-white">Heroes</h1>
+              <h1 class="text-center text-white">Heroes</h1>
+              <%= form_tag(heros_path, method: :get, class: "form-inline mb-2") do %>
+                <div class="input-group">
+                  <%= text_field_tag(:search, params[:search], class: "rounded-4 form-control", placeholder: "Search by Name") %>
+                  
+                  <!-- Additional filter for power -->
+                  <%= select_tag(:power_filter, options_for_select(["", "Fire", "Ice", "Telekinesis", "Invisibility"], params[:power_filter]), class: "form-control rounded-4") %>
+
+                  <div class="input-group-append">
+                    <%= submit_tag("Search", class: "rounded-4 btn btn-primary btn-lg px-4 me-sm-3 custom-btn") %>
+                  </div>
+                </div>
+              <% end %>
+
                 <div class="container">
                   <%= link_to "Home", root_path, class: "rounded-4 btn btn-primary btn-lg px-4 me-sm-3 custom-btn mb-3" %>
                   <%= link_to "Create", new_hero_path, class: "rounded-4 btn btn-outline-light btn-lg px-4 mb-3" %>
