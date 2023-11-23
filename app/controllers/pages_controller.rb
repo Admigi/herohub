@@ -6,13 +6,7 @@ class PagesController < ApplicationController
 
   def dashboard
     @user = current_user
-    @bookings = @user.bookings
-    @heros = @user.heros
-
-    if current_user
-      @heros = current_user.heros
-    else
-      @heros = [] 
-    end
-  end
+    @bookings = @user ? @user.bookings : []
+    @heros = @user&.heros || []
+  end  
 end
