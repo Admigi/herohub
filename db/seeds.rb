@@ -8,7 +8,7 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 require "faker"
-
+Booking.destroy_all
 Hero.destroy_all
 User.destroy_all
 user = User.create(username: "toto", email: "totoduguetto@toto.com", password: "password")
@@ -228,3 +228,4 @@ silly_powers = [
     user_id: user.id
   )
 end
+
