@@ -6,9 +6,19 @@ class HerosController < ApplicationController
     per_page = 9
     @page_number = (params[:page] || 1).to_i
     offset = (@page_number - 1) * per_page
+    if params[:search].present?
+      search_term = params[:search].downcase
+      @heros = Hero.where("LOWER(name) LIKE ?", "%#{search_term}%")
+                   .limit(per_page)
+                   .offset(offset)
+    else
+      @heros = Hero.limit(per_page).offset(offset)
+    end
 
-    @heros = Hero.limit(per_page).offset(offset)
-    @total_pages = (Hero.count.to_f / per_page).ceil
+    # Filters
+    @heros = @heros.where(power: params[:power_filter]) if params[:power_filter].present?
+
+    @total_pages = (@heros.count.to_f / per_page).ceil
   end
 
   def show
