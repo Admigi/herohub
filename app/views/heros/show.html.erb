@@ -41,9 +41,11 @@
           <div class="row gx-5">
               <div class="col-lg-4 mb-5 mb-lg-0">
                 <div class="col-lg-8 d-flex justify-content-start"> <!-- Modified line -->
+                <% if current_user.id == @hero.user_id%>
                   <%= link_to "Edit", edit_hero_path, class:"rounded-4 btn btn-outline-light btn-lg px-4 me-sm-3" %>
                   <%= link_to "Delete", hero_path(@hero), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class:"me-sm-3 rounded-4 btn btn-outline-light btn-lg px-4", method: :delete %>
-                  <%= link_to "Back", heros_path, class:"me-sm-3 rounded-4 btn btn-outline-light btn-lg px-4" %>
+                    <% end %>
+                    <%= link_to "Back", hero_path, class:"me-sm-3 rounded-4 btn btn-outline-light btn-lg px-4" %>
                 </div>
               </div>
 

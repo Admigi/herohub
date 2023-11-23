@@ -2,11 +2,12 @@
 
 <br>
 
-<%= simple_form_for(@hero) do |f| %>
-  <%= f.input :name %>
-  <%= f.input :description %>
-  <%= f.input :power %>
-  <%= f.input :city %>
-  <%= f.input :price %>
-  <%= f.button :submit %>
-<% end %>
+
+  <%= simple_form_for(@hero) do |f| %>
+    <%= f.input :name %>
+    <%= f.input :description %>
+    <%= f.input :power %>
+    <%= f.input :city %>
+    <%= f.input :price %>
+    <%= f.button :submit %>
+  <% end %>
