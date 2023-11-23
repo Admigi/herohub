@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-
+  has_many :reviews
   has_many :bookings
   has_many :heros
   # Include default devise modules. Others available are:

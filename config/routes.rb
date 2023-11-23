@@ -17,7 +17,11 @@ Rails.application.routes.draw do
       patch 'decline'
     end
   end
-  
+
+  resources :heros do
+    resources :reviews, only: [:new, :create]
+  end
+
   resources :heros do
     resources :bookings, only: %i[index show new create update destroy]
   end
