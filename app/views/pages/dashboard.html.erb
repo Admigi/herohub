@@ -1,13 +1,88 @@
 <h1>Welcome, <%= @user.username %>!</h1>
 
-<h2>Your Bookings as Renter</h2>
-<% @bookings.each do |booking| %>
-  <!-- Display information about each booking -->
-  <%= booking.hero.name %> on <%= booking.start_date %> <!-- Adjust based on your actual attribute names -->
-<% end %>
+<div>
+  <h2>Your Heroes</h2>
+  <% @heros.each do |hero| %>
+    <div>
+      <h3><%= hero.name %></h3>
+      <ul>
+        <li><%= hero.power %></li>
+        <li><%= hero.price %></li>
+      </ul>
+      <%= link_to 'Edit', edit_hero_path(hero) %>
+      <%= link_to 'Delete', hero_path(hero), method: :delete, data: { confirm: 'Are you sure?' } %>
+    </div>
+  <% end %>
+</div>
 
-<h2>Your Bookings as Owner</h2>
-<% @bookings_as_owner.each do |booking| %>
-  <!-- Display information about each booking -->
-  <%= booking.hero.name %> on <%= booking.start_date %> <!-- Adjust based on your actual attribute names -->
-<% end %>
+
+<div>
+  <h2>Pending Bookings</h2>
+  <% @heros.each do |hero| %>
+    <% hero.bookings.each do |booking| %>
+      <% if booking.status == 'pending' %>
+        <div class="booking">
+          <h3><%= hero.name %></h3>
+          <ul>
+            <li><%= booking.user.username %> wants to book <%= hero.name %></li>
+            <li><%= booking.start_date %> to <%= booking.end_date %></li>
+            <li><%= booking.status %></li>
+          </ul>
+
+          <%= simple_form_for [hero, booking], method: :patch do |f| %>
+            <%= f.input :status, as: :hidden, input_html: { value: 'accepted'} %>
+            <%= f.submit 'Accept', class: 'btn btn-info' %>
+          <% end %>
+
+          <%= simple_form_for [hero, booking], method: :patch do |f| %>
+            <%= f.input :status, as: :hidden, input_html: { value: 'rejected'} %>
+            <%= f.submit 'Reject', class: 'btn btn-light' %>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
+
+
+<div>
+  <h2>Your Reservations</h2>
+  <ul>
+    <% @bookings.each do |booking| %>
+      <!-- Display information about each booking -->
+      <li><%= booking.hero.name %></li>
+      <li><%= booking.start_date %> to <%= booking.end_date %></li>
+    <% end %>
+  </ul>
+</div>
+
+<div class="bookings">
+  <% @bookings.each do |booking| %>
+    <div class="booking">
+      <div class='booking-left'>
+        <div class="booking-info">
+          <div class="booking-info-title">
+            <%= booking.user.username %>
+          </div>
+          <div class="booking-info-details">
+            <%= booking.start_date %> - <%= booking.end_date %>
+          </div>
+        </div>
+      </div>
+      <div class="booking-actions">
+        <% if booking.status == "pending" %>
+          <%= simple_form_for booking do |f| %>
+            <%= f.input :status, as: :hidden, input_html: { value: 'accepted'} %>
+            <%= f.submit 'Accept', class: 'btn btn-info' %>
+          <% end %>
+          <%= simple_form_for booking do |f| %>
+            <%= f.input :status, as: :hidden, input_html: { value: 'rejected'} %>
+            <%= f.submit 'Reject', class: 'btn btn-light' %>
+          <% end %>
+        <% else %>
+          <p class='booking-tag'><%= booking.status %></p>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

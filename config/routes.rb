@@ -13,6 +13,6 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   resources :heros do
-    resources :bookings, only: %i[index show new create destroy]
+    resources :bookings, only: %i[index show new create update destroy]
   end
 end

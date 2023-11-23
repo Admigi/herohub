@@ -30,7 +30,7 @@
               <% else %>
                 <li class="nav-item"><%= link_to "Login", new_user_session_path, class: "nav-link" %></li>
               <% end %>
-            </ul> 
+            </ul>
                 </div>
             </div>
         </nav>
@@ -43,7 +43,7 @@
                 <div class="col-lg-8 d-flex justify-content-start"> <!-- Modified line -->
                   <%= link_to "Edit", edit_hero_path, class:"rounded-4 btn btn-outline-light btn-lg px-4 me-sm-3" %>
                   <%= link_to "Delete", hero_path(@hero), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class:"me-sm-3 rounded-4 btn btn-outline-light btn-lg px-4", method: :delete %>
-                  <%= link_to "Back", hero_path, class:"me-sm-3 rounded-4 btn btn-outline-light btn-lg px-4" %>
+                  <%= link_to "Back", heros_path, class:"me-sm-3 rounded-4 btn btn-outline-light btn-lg px-4" %>
                 </div>
               </div>
 
