@@ -48,11 +48,11 @@
         </div>
 <div class="container px-5 text-white">
   <h2>Pending Bookings</h2>
+  <div class="booking text-white border mb-3 p-3">
   <% if @user.present? %>
     <% if @user.heros.present? %>
       <% @user.heros.each do |hero| %>
         <% hero.bookings.each do |booking| %>
-          <div class="booking text-white border mb-3 p-3">
             <h3><%= hero.name %></h3>
             <!-- Display booking details -->
             <p><strong>User:</strong> <%= booking.user.username %></p>
@@ -75,16 +75,16 @@
               <% else %>
                 <p class='booking-tag'>You don't have permission to accept or reject this booking</p>
               <% end %>
-            </div>
           </div>
         <% end %>
       <% end %>
     <% end %>
+    </div>
     
     <% if @bookings.present? %>
       <h2>Your Requests</h2>
+      <div class="booking text-white border mb-3 p-3">
       <% @bookings.each do |booking| %>
-        <div class="booking text-white border mb-3 p-3">
           <h3><%= booking.hero.name %></h3>
           <!-- Display booking details -->
           <p><strong>Your Request:</strong> <%= booking.hero.name %> from <%= booking.start_date %> to <%= booking.end_date %></p>
@@ -97,7 +97,6 @@
                 <%= f.submit 'Cancel', class: 'btn btn-light' %>
               <% end %>
             <% end %>
-        </div>
       <% end %>
     <% else %>
       <p>No pending requests from you.</p>
@@ -105,6 +104,7 @@
   <% else %>
     <p>Please sign in to view your dashboard.</p>
   <% end %>
+    </div>
 </div>
 
       </main>
