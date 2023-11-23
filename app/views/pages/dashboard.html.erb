@@ -36,91 +36,54 @@
             </div>
         </nav>
 
-<h1>Welcome, <%= @user.username %>!</h1>
-
-<div>
-  <h2>Your Heroes</h2>
-  <% @heros.each do |hero| %>
-    <div>
-      <h3><%= hero.name %></h3>
-      <ul>
-        <li><%= hero.power %></li>
-        <li><%= hero.price %></li>
-      </ul>
-      <%= link_to 'Edit', edit_hero_path(hero) %>
-      <%= link_to 'Delete', hero_path(hero), method: :delete, data: { confirm: 'Are you sure?' } %>
-    </div>
-  <% end %>
-</div>
-
-
-<div>
-  <h2>Pending Bookings</h2>
-  <% @heros.each do |hero| %>
-    <% hero.bookings.each do |booking| %>
-      <% if booking.status == 'pending' %>
-        <div class="booking">
-          <h3><%= hero.name %></h3>
-          <ul>
-            <li><%= booking.user.username %> wants to book <%= hero.name %></li>
-            <li><%= booking.start_date %> to <%= booking.end_date %></li>
-            <li><%= booking.status %></li>
-          </ul>
-
-          <%= simple_form_for [hero, booking], method: :patch do |f| %>
-            <%= f.input :status, as: :hidden, input_html: { value: 'accepted'} %>
-            <%= f.submit 'Accept', class: 'btn btn-info' %>
-          <% end %>
-
-          <%= simple_form_for [hero, booking], method: :patch do |f| %>
-            <%= f.input :status, as: :hidden, input_html: { value: 'rejected'} %>
-            <%= f.submit 'Reject', class: 'btn btn-light' %>
-          <% end %>
+        <div class="container px-5 text-white">
+            <h2 class="text-white">Your Heroes</h2>
+            <% if current_user %>
+              <% @heros.where(user_id: current_user.id).each do |hero| %>
+                <div class="hero">
+                  <li><%= hero.name %></li>
+                </div>
+              <% end %>
+            <% end %>
         </div>
-      <% end %>
-    <% end %>
-  <% end %>
-</div>
-
-
-<div>
-  <h2>Your Reservations</h2>
-  <ul>
-    <% @bookings.each do |booking| %>
-      <!-- Display information about each booking -->
-      <li><%= booking.hero.name %></li>
-      <li><%= booking.start_date %> to <%= booking.end_date %></li>
-    <% end %>
-  </ul>
-</div>
-
-<div class="bookings">
-  <% @bookings.each do |booking| %>
-    <div class="booking">
-      <div class='booking-left'>
-        <div class="booking-info">
-          <div class="booking-info-title">
-            <%= booking.user.username %>
+        <div class="container px-5 text-white">
+            <h2 class="text-white">Pending bookings</h2>
+            <div class="bookings">
+              <% @bookings.each do |booking| %>
+                <div class="booking">
+                  <div class='booking-left'>
+                    <div class="booking-info">
+                      <div class="booking-info-title">
+                        <%= booking.user.username %> - <%= booking.hero.name %>
+                      </div>
+                      <div class="booking-info-details">
+                        <%= booking.start_date %> - <%= booking.end_date %>
+                      </div>
+                    </div>
+                    <div class="booking-actions">
+                      <% if current_user.id != booking.hero.user_id %>
+                      <div class="booking-actions">
+                        <% if booking.status == 'pending' %>
+                          <%= simple_form_for booking do |f| %>
+                            <%= f.input :status, as: :hidden, input_html: { value: 'accepted'} %>
+                            <%= f.submit 'Accept', class: 'btn btn-info' %>
+                          <% end %>
+                          <%= simple_form_for booking, html: { method: :patch, data: { confirm: 'Are you sure you want to reject this booking?' } } do |f| %>
+                            <%= f.input :status, as: :hidden, input_html: { value: 'rejected'} %>
+                            <%= f.submit 'Reject', class: 'btn btn-light' %>
+                          <% end %>
+                        <% else %>
+                          <p class='booking-tag'><%= booking.status %></p>
+                        <% end %>
+                      </div>
+                    <% else %>
+                      <p class='booking-tag'>You don't have permission to accept or reject this booking</p>
+                    <% end %>
+                  </div>
+                </div>
+              <% end %>
+            </div>
           </div>
-          <div class="booking-info-details">
-            <%= booking.start_date %> - <%= booking.end_date %>
-          </div>
-        </div>
-      </div>
-      <div class="booking-actions">
-        <% if booking.status == "pending" %>
-          <%= simple_form_for booking do |f| %>
-            <%= f.input :status, as: :hidden, input_html: { value: 'accepted'} %>
-            <%= f.submit 'Accept', class: 'btn btn-info' %>
-          <% end %>
-          <%= simple_form_for booking do |f| %>
-            <%= f.input :status, as: :hidden, input_html: { value: 'rejected'} %>
-            <%= f.submit 'Reject', class: 'btn btn-light' %>
-          <% end %>
-        <% else %>
-          <p class='booking-tag'><%= booking.status %></p>
-        <% end %>
-      </div>
-    </div>
-  <% end %>
-</div>
+      </main>
+    </body>
+</html>
