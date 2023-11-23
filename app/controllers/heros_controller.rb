@@ -3,7 +3,7 @@ class HerosController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[index show]
 
   def index
-    per_page = 9
+    per_page = 12
     @page_number = (params[:page] || 1).to_i
     offset = (@page_number - 1) * per_page
     if params[:search].present?
@@ -16,9 +16,19 @@ class HerosController < ApplicationController
     end
 
     # Filters
-    @heros = @heros.where(power: params[:power_filter]) if params[:power_filter].present?
+    case params[:price_range]
+    when "$"
+      @heros = @heros.where(price: 1..499)
+    when "$$"
+      @heros = @heros.where(price: 500..999)
+    when "$$$"
+      @heros = @heros.where(price: 1000..Float::INFINITY)
+    end
 
-    @total_pages = (@heros.count.to_f / per_page).ceil
+    # City Filter
+    @heros = @heros.where(city: params[:city_filter]) if params[:city_filter].present?
+
+    @total_pages = (Hero.count.to_f / per_page).ceil
   end
 
   def show
@@ -61,5 +71,9 @@ class HerosController < ApplicationController
 
   def hero_params
     params.require(:hero).permit(:name, :description, :power, :city, :price)
+  end
+
+  def city_options
+    Hero.distinct.pluck(:city)
   end
 end

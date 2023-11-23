@@ -1,84 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Herohub</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <!-- Bootstrap icons-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-    </head>
-    <body class="d-flex flex-column h-100">
-        <main class="flex-shrink-0">
-            <!-- Navigation-->
-            <nav class="navbar navbar-expand-lg navbar-dark bg-black">
-                <div class="container px-5">
-                    <%= link_to "/", class: "navbar-brand" do %>
-                      <%= image_tag "logo.png", style: "height: 50px; width: auto;" %>
-                    <% end %>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                            <li class="nav-item"><a class="nav-link" href="/heros">Heroes</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/">Profile</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/">FAQ</a></li>
-                            <% if user_signed_in? %>
-                            <li class="nav-item"><%= button_to "Logout", destroy_user_session_path, method: :delete, class: "nav-link" %></li>
-                              <% else %>
-                            <li class="nav-item"><%= button_to "Login", new_user_session_path, class: "nav-link" %></li>
-                            <% end %>
-                        </ul> 
-                    </div>
-                </div>
-            </nav>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Herohub</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+  </head>
+  <body class="d-flex flex-column h-100">
+    <main class="flex-shrink-0">
+      <!-- Navigation-->
+      <nav class="navbar navbar-expand-lg navbar-dark bg-black">
+        <div class="container px-5">
+          <div class="d-flex align-items-center w-100">
+            <%= link_to "/", class: "navbar-brand" do %>
+              <%= image_tag "logo.png", style: "height: 50px; width: auto;" %>
+            <% end %>
+            <%= form_tag(heros_path, method: :get, class: "form flex-grow-1") do %>
+              <div class="form-item">
+                <i class="fa fa-search"></i>
+                <%= text_field_tag(:search, params[:search], class: "form-control form-input", placeholder: "Search anything...") %>
+                <span><i class="fa-solid fa-shield-halved fa-bounce" style="color: #9ca3af;"></i></span>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </nav>
 
             <section class="bg-black">
-              <h1 class="text-center text-white">Heroes</h1>
-              <%= form_tag(heros_path, method: :get, class: "form-inline mb-2") do %>
-                <div class="input-group">
-                  <%= text_field_tag(:search, params[:search], class: "rounded-4 form-control", placeholder: "Search by Name") %>
-                  
-                  <!-- Additional filter for power -->
-                  <%= select_tag(:power_filter, options_for_select(["", "Fire", "Ice", "Telekinesis", "Invisibility"], params[:power_filter]), class: "form-control rounded-4") %>
+          <style>
+            .card-body::-webkit-scrollbar {
+                display: none;
+            }
+            
+            .form{
 
-                  <div class="input-group-append">
-                    <%= submit_tag("Search", class: "rounded-4 btn btn-primary btn-lg px-4 me-sm-3 custom-btn") %>
-                  </div>
-                </div>
-              <% end %>
+                  position: relative;
+              }
+
+              .form .fa-search{
+
+                  position: absolute;
+                  top:20px;
+                  left: 20px;
+                  color: #9ca3af;
+
+              }
+
+              .form span{
+
+                      position: absolute;
+                  right: 17px;
+                  top: 13px;
+                  padding: 2px;
+                  border-left: 1px solid #d1d5db;
+
+              }
+
+              .left-pan{
+                  padding-left: 7px;
+              }
+
+              .left-pan i{
+                
+                padding-left: 10px;
+              }
+
+              .form-input{
+
+                  height: 55px;
+                  text-indent: 33px;
+                  border-radius: 10px;
+              }
+
+              .form-input:focus{
+
+                  box-shadow: none;
+                  border:none;
+              }
+          </style>
+
 
                 <div class="container">
-                  <%= link_to "Home", root_path, class: "rounded-4 btn btn-primary btn-lg px-4 me-sm-3 custom-btn mb-3" %>
-                  <%= link_to "Create", new_hero_path, class: "rounded-4 btn btn-outline-light btn-lg px-4 mb-3" %>
+                  <div class="d-flex justify-content-start mb-3 position-fixed bottom-0 start-0 p-5">
+                    <%= link_to new_hero_path, class: "rounded-5 btn btn-outline-light btn-sm px-3 btn-circle", title: "Create" do %>
+                        <i class="fas fa-plus"></i>
+                    <% end %>
+                </div>
                   <div class="row">
                     <% @heros.each do |hero| %>
-                      <div class="col-md-4 mb-4">
-                        <div class="card rounded-5" style="background-color: #000000; background-image: linear-gradient(180deg, #000000 0%, #ffffff 100%);">                                   
+                      <div class="col-md-3 mb-3">
+                      <div class="card rounded-5" style="background-color: #ffffff;">                                   
                           <%= image_tag "hero#{rand(1..16)}.png", class: "card-img-top rounded-top rounded-top-5", alt: "#{hero.name} Image" %>
-                          <div class="card-body">
-                            <h2 class="card-title h5 mb-3"><span style="font-weight: bold;"><%= hero.name %></h2>
-                            <p class="card-text text-muted mb-4"><%= hero.description %></p>
-                            <ul class="list-unstyled mb-0">
-                              <li><strong>Power:</strong> <span style="font-weight: bold;"><%= hero.power %></span></li>
-                              <li><strong>City:</strong> <span style="font-weight: bold;"><%= hero.city %></span></li>
-                              <li><strong>Price:</strong> <span style="font-weight: bold;"> <%= number_to_currency(hero.price, unit: '') %></li>
-                            </ul>
+                          <div class="card-body p-3 d-flex flex-column justify-content-between" style="height: 250px; overflow-y: auto; font-family: 'Poppins', sans-serif;"> <!-- Set a fixed height for the card body, adjust as needed -->
+                              <div>
+                                  <h2 class="card-title h6 mb-2 text-center" style="font-size: 1.2rem; color: #333333;"><strong><%= hero.name %></strong></h2>
+                                  <p class="card-text text-muted" style="font-size: 1rem; color: #555555;"><strong>Power:</strong> <%= hero.power %></p>
+                              </div>
+                              <div>
+                                  <p class="card-text text-muted mb-1"><%= number_to_currency(hero.price, unit: '$') %></p>
+                              </div>
+                              <div>
+                                  <%= link_to "Rent", root_path, class: "rounded-4 btn btn-primary btn-lg px-3 me-sm-2 custom-btn mb-2" %>
+                                  <%= link_to "More Infos", hero_path(hero), class: "rounded-4 btn btn-outline-light btn-lg px-3 mb-2 bg-black text-white" %>
+                              </div>
                           </div>
-                          <div class="card-footer">
-                            <%= link_to "Rent", root_path, class: "rounded-4 btn btn-primary btn-lg px-4 me-sm-3 custom-btn mb-3" %>
-                            <%= link_to "More Infos", hero_path(hero), class: "rounded-4 btn btn-outline-light btn-lg px-4 mb-3 bg-black text-white" %>
-                          </div>
-                        </div>
                       </div>
+                  </div>
                     <% end %>
                   </div>
                 </div>
             </section>
 
-          <nav aria-label="Numerous Page Navigation">
+            <nav aria-label="Numerous Page Navigation">
             <ul class="pagination justify-content-center bg-black mb-0">
               <% (1..@total_pages).each do |page| %>
                 <li class="page-item <%= 'active' if page == @page_number %>">
