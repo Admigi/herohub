@@ -218,7 +218,7 @@ silly_powers = [
 ]
 
 # Seed to generate silly heroes with funny or useless powers
-100.times do
+5.times do
   Hero.create(
     name: hero_names.sample,
     description: Faker::JapaneseMedia::StudioGhibli.quote,
