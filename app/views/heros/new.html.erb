@@ -35,20 +35,21 @@
       </div>
     </nav>
 
-    <!-- Hero Form Section -->
-    <section class="text-white container mt-4">
-      <h1>Add a hero to rent</h1>
-      <br>
+      <!-- Hero Form Section -->
+      <section class="text-white container mt-4">
+        <h1>Add a hero to rent</h1>
+        <br>
 
-      <%= simple_form_for(@hero) do |f| %>
-        <%= f.input :name %>
-        <%= f.input :description %>
-        <%= f.input :power %>
-        <%= f.input :city %>
-        <%= f.input :price %>
-        <%= f.button :submit, class: "btn btn-primary" %>
-      <% end %>
-    </section>
-  </main>
+        <%= simple_form_for(@hero) do |f| %>
+          <%= f.input :name %>
+          <%= f.input :description %>
+          <%= f.input :power %>
+          <%= f.input :city %>
+          <%= f.input :price %>
+          <%= f.input :image, as: :file %>
+          <%= f.button :submit, class: "btn btn-primary" %>
+        <% end %>
+      </section>
+    </main>
 </body>
 </html>

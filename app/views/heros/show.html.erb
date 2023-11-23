@@ -53,8 +53,12 @@
               <div class="card mt-4 rounded-5">
                 <div class="card-body d-flex">
                   <div class="flex-shrink-0 text-center">
-                    <% hero_image_id = @hero.id %>
-                    <%= image_tag "hero#{hero_image_id % 16 + 1}.png", class: "card-img-top rounded-5", alt: "#{@hero.name} Image", style: "width: 150px;" %>
+                    <% if @hero.image.attached? %>
+                      <%= image_tag hero.image, class: "card-img rounded-5", style: "width: 150px;", alt: "#{@hero.name} Image" %>
+                    <% else %>
+                      <% hero_image_id = @hero.id %>
+                      <%= image_tag "hero#{hero_image_id % 16 + 1}.png", class: "card-img rounded-5", style: "width: 150px;", alt: "#{@hero.name} Image" %>
+                    <% end %>
                   </div>
                   <div class="flex-grow-1 ms-3">
                     <h1 class="card-title display-4 fw-bold mb-3"><%= @hero.name %></h1>
