@@ -295,7 +295,6 @@ DEPENDENCIES
   pg (~> 1.1)
   puma (>= 5.0)
   rails (~> 7.1.2)
-  rails-jquery-autocomplete
   sassc-rails
   selenium-webdriver
   simple_form!
