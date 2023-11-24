@@ -19,6 +19,10 @@ Rails.application.routes.draw do
   end
 
   resources :heros do
+    resources :messages, only: [:index, :create]
+  end
+  
+  resources :heros do
     resources :reviews, only: [:new, :create]
   end
 

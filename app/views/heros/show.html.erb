@@ -80,6 +80,8 @@
                       <%= f.input :end_date, as: :string, input_html: { class: "form-control rounded-5", data: { "flatpickr" => true } }, placeholder: "End Date" %>
                     </div>
                     <div class="row col-md-2 mt-3">
+                      <%= link_to "Message", hero_messages_path(@hero), class: "rounded-4 btn btn-outline-light btn-lg px-3 mb-2 bg-black text-white" %>
+
                       <%= f.submit "Book", class: "rounded-4 btn btn-outline-light btn-lg px-3 mb-2 bg-black text-white" %>
                     </div>
                   </div>
