@@ -217,8 +217,19 @@ silly_powers = [
   "Can turn into a ghost but only when nobody is looking"
 ]
 
-# Seed to generate silly heroes with funny or useless powers
-100.times do
+god_hero = Hero.create!(
+  name: "God",
+  description: "He's never here when we need him BUT he's a god for sure.",
+  power: "He exists, that's something great so far.",
+  city: "Nantes",
+  price: "You can't quantify him",
+  user_id: user.id
+)
+
+god_hero.image.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'god.png')), filename: 'god.png')
+
+
+5.times do
   Hero.create(
     name: hero_names.sample,
     description: Faker::JapaneseMedia::StudioGhibli.quote,

@@ -4,7 +4,7 @@ class BookingsController < ApplicationController
   def index
     @bookings = Booking.all
   end
-
+  
   def show
     @booking = Booking.find(params[:id])
   end
@@ -34,6 +34,7 @@ class BookingsController < ApplicationController
       render :dashboard, status: :unprocessable_entity
     end
   end
+    
 
   private
 

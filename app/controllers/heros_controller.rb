@@ -34,6 +34,7 @@ class HerosController < ApplicationController
   def show
     @hero = Hero.find(params[:id])
     @booking = Booking.new
+    @review = Review.new
   end
 
   def new
@@ -70,7 +71,7 @@ class HerosController < ApplicationController
   private
 
   def hero_params
-    params.require(:hero).permit(:name, :description, :power, :city, :price)
+    params.require(:hero).permit(:name, :description, :power, :city, :price, :image)
   end
 
   def city_options
