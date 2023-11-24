@@ -22,6 +22,13 @@ Rails.application.routes.draw do
     resources :reviews, only: [:new, :create]
   end
 
+  resources :bookings do
+    member do
+      patch 'accept'
+      patch 'decline'
+    end
+  end
+
   resources :heros do
     resources :bookings, only: %i[index show new create update destroy]
   end
