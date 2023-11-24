@@ -29,7 +29,7 @@ class BookingsController < ApplicationController
   def update
     @booking = Booking.find(params[:id])
     if @booking.update(booking_params)
-      redirect_to dashboard_path, notice: 'Booking was successfully updated.'
+      redirect_to dashboard_path(@booking), notice: 'Booking was successfully updated.'
     else
       render :dashboard, status: :unprocessable_entity
     end
