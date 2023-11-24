@@ -8,9 +8,10 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 require "faker"
+User.destroy_all
 Booking.destroy_all
 Hero.destroy_all
-User.destroy_all
+
 user = User.create(username: "toto", email: "totoduguetto@toto.com", password: "password")
 user2 = User.create(username: "tata", email: "tataduguetto@toto.com", password: "password")
 
@@ -222,7 +223,7 @@ god_hero = Hero.create!(
   description: "He's never here when we need him BUT he's a god for sure.",
   power: "He exists, that's something great so far.",
   city: "Nantes",
-  price: "You can't quantify him",
+  price: 999999999999999999999999999999999999999999999999999999999999999999999999999999999,
   user_id: user.id
 )
 

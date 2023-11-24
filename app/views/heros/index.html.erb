@@ -88,7 +88,7 @@
               <div class="container">
                 <div class="d-flex justify-content-start mb-3 position-fixed bottom-0 start-0 p-5">
                   <%= link_to new_hero_path, class: "rounded-5 btn btn-outline-light btn-sm px-3 btn-circle", title: "Create" do %>
-                    <i class="fas fa-plus">Create</i>
+                    <i class="fas fa-plus">Add</i>
                   <% end %>
                 </div>
                 <div class="row">
@@ -110,7 +110,11 @@
                             <p class="card-text text-muted mb-1"><%= number_to_currency(hero.price, unit: '$') %></p>
                           </div>
                           <div>
-                            <%= link_to "Rent", hero_path(hero), class: "rounded-4 btn btn-outline-light btn-lg px-3 mb-2 bg-black text-white" %>
+                            <% if current_user %>
+                              <%= link_to "Rent", hero_path(hero), class: "rounded-4 btn btn-outline-light btn-lg px-3 mb-2 bg-black text-white" %>
+                            <% else %>
+                              <%= link_to "Rent", new_user_session_path, class: "rounded-4 btn btn-outline-light btn-lg px-3 mb-2 bg-black text-white" %>
+                            <% end %>
                           </div>
                         </div>
                       </div>
